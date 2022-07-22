@@ -1,0 +1,35 @@
+Дана HTML таблица. Добавьте в нее еще одну колонку, в которой для каждого ряда таблицы будет стоять ссылка на удаление этого ряда.
+
+<table id="parent">
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>5</td>
+		<td>6</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>5</td>
+		<td>6</td>
+	</tr>
+</table>
+
+<script> 
+let trs = document.querySelectorAll('#parent tr');
+
+for(let tr of trs) {
+	let td = document.createElement('td');
+	let a = document.createElement('a');
+	a.innerHTML = 'remove';
+	a.href = '';
+	a.addEventListener('click', function(event) {
+		tr.remove();
+		event.preventDefault();
+	});
+	td.appendChild(a);
+	tr.appendChild(td);
+}
