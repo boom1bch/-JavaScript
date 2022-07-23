@@ -1,0 +1,36 @@
+Добавьте ссылку на удаление в конец каждого абзаца.
+Сделайте так, чтобы по клику на span в нем появлялся инпут для редактирования.
+
+
+<div id="parent">
+	<p><span>text1</span></p>
+	<p><span>text2</span></p>
+	<p><span>text3</span></p>
+</div>
+
+<script> 
+let spans = document.querySelectorAll('span');
+let elems = document.querySelectorAll('p');
+for(let elem of elems) {
+	let a = document.createElement('a');
+	a.textContent = 'delete';
+	a.href = '';
+	a.addEventListener('click', function(event) {
+		elem.remove();
+		event.preventDefault();
+	})
+	elem.appendChild(a);
+}
+for(let span of spans) {
+span.addEventListener('click', function func() {
+	let input = document.createElement('input');
+	input.value = span.innerHTML;
+	span.textContent = '';
+	span.appendChild(input);
+	input.addEventListener('blur', function() {
+		span.textContent = this.value;
+		span.addEventListener('click', func);
+	});
+	span.removeEventListener('click', func);
+	});
+}
