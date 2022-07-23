@@ -1,0 +1,16 @@
+Дан тег ul. Сделайте так, чтобы по клику на любую li в ней появлялся инпут, с помощью которого можно будет поредатировать текст этой li.
+
+let lis = document.querySelectorAll('#parent li');
+for(let li of lis) {
+	li.addEventListener('click', function func() {
+		let input = document.createElement('input');
+		input.value = li.textContent;
+		li.textContent = '';
+		li.appendChild(input);
+		input.addEventListener('blur', function() {
+			li.textContent = this.value;
+			li.addEventListener('click', func);
+		});
+		li.removeEventListener('click', func);
+	});
+}
