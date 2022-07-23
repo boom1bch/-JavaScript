@@ -34,3 +34,50 @@ span.addEventListener('click', function func() {
 	span.removeEventListener('click', func);
 	});
 }
+
+//Пусть теперь изначально тегов span нет:
+
+<div id="parent">
+	<p>text1</p>
+	<p>text2</p>
+	<p>text3</p>
+</div>
+
+//Оберните сначала текст абзаца в теги span, добавьте к этим тегам возможность 
+//редактирования, а затем добавьте в конец каждого абзаца ссылку на удаление.
+
+
+let elems = document.querySelectorAll('p');
+for(let elem of elems) {
+	let span = document.createElement('span');
+	span.textContent = elem.textContent;
+	elem.textContent = '';
+	elem.appendChild(span);
+}
+let spans = document.querySelectorAll('span');
+
+for(let elem of elems) {
+	let a = document.createElement('a');
+	a.textContent = 'delete';
+	a.href = '';
+	a.addEventListener('click', function(event) {
+		elem.remove();
+		event.preventDefault();
+	})
+	elem.appendChild(a);
+}
+
+
+for(let span of spans) {
+span.addEventListener('click', function func() {
+	let input = document.createElement('input');
+	input.value = span.innerHTML;
+	span.textContent = '';
+	span.appendChild(input);
+	input.addEventListener('blur', function() {
+		span.textContent = this.value;
+		span.addEventListener('click', func);
+	});
+	span.removeEventListener('click', func);
+	});
+}
