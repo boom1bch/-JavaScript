@@ -81,3 +81,33 @@ span.addEventListener('click', function func() {
 	span.removeEventListener('click', func);
 	});
 }
+
+
+
+//<p>text1</p>
+//<p>text2</p>
+//<p>text3</p>
+//Добавьте в конец каждого абзаца ссылку, по клику на которую текст абзаца 
+//будет перечеркиваться (а ссылка - нет).
+//Модифицируйте предыдущую задачу так, чтобы после нажатия на ссылку
+//эта ссылка удалялась из абзаца (а текст абзаца становился перечеркнутым).
+
+
+let elems = document.querySelectorAll('p');
+for(let elem of elems) {
+	let span = document.createElement('span');
+	span.textContent = elem.textContent;
+	elem.textContent = '';
+	
+	elem.appendChild(span);
+	let a = document.createElement('a');
+	a.href = '';
+	a.textContent = 'delete';
+	a.addEventListener('click', function(event) {
+		span.classList.add('firstColor');
+		event.preventDefault();
+		a.remove();
+	})
+	elem.appendChild(a);
+}
+
